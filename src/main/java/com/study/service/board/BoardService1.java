@@ -25,4 +25,14 @@ public class BoardService1 { //mapper에 넘기기
 		
 		return mapper.getById(id);
 	}
+
+	public int update(BoardDto1 board) {
+		
+		return mapper.change(board);
+		
+	}
+
+	public int delete(int id) {
+		return mapper.remove(id);
+	}
 }

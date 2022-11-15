@@ -11,5 +11,9 @@ public interface BoardMapper1 {
 	List<BoardDto1> list();
 
 	BoardDto1 getById(int id);
+
+	int change(BoardDto1 board);
+
+	int remove(int id);
 	
 }

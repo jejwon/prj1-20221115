@@ -1,8 +1,10 @@
 <%@ tag language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ attribute name="active" %>
 
-<c:url value="/boardEx/listEx" var="listLink"/>
-<c:url value="/boardEx/registerEx" var="registerLink"/>
+<c:url value="/board1/listEx" var="listLink"/>
+<c:url value="/board1/registerEx" var="registerLink"/>
+
 
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">

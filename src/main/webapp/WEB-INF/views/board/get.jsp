@@ -33,8 +33,8 @@
 					<c:url value="/board/modify" var="modifyLink">
 						<c:param name="id" value="${board.id }"></c:param>
 					</c:url>
-					<a class="btn btn-warning" href="${modifyLink }"> <i
-						class="fa-solid fa-pen-to-square"></i>
+					<a class="btn btn-warning" href="${modifyLink }"> 
+						<i class="fa-solid fa-pen-to-square"></i>
 					</a>
 				</h1>
 

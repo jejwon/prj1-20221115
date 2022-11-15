@@ -24,9 +24,24 @@
  		id,
  		title,
  		writer,
+ 		content,
  		inserted
  	FROM Board1
  	WHERE id = #{id}
  	</select>
  	
+ 	<update id="change">
+ 	UPDATE Board1 
+ 	SET 
+ 		title = #{title},
+ 		content = #{content},
+ 		writer = #{writer}
+ 	WHERE 
+ 		id = #{id}
+ 	</update>
+ 	
+ 	<delete id="remove">
+ 	DELETE FROM Board1
+ 	WHERE id = #{id}
+ 	</delete>
  </mapper>
