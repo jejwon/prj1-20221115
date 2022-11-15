@@ -16,78 +16,65 @@
 </head>
 <body>
 	<my:navBar active="signup"></my:navBar>
-	
+
 	<div class="container-md">
 		<div class="row">
 			<div class="col">
 				<h1>회원가입</h1>
-				
+
 				<form action="" method="post">
 					<div class="mb-3">
-						<label for="" class="form-label">
-							아이디
-						</label>
-						
+						<label for="" class="form-label"> 아이디 </label>
+
 						<div class="input-group">
-							<input id="userIdInput1" class="form-control" type="text" name="id">
-							<button id="userIdExistButton1" class="btn btn-outline-secondary" type="button">중복확인</button>
+							<input id="userIdInput1" class="form-control" type="text"
+								name="id">
+							<button id="userIdExistButton1" class="btn btn-outline-secondary"
+								type="button">중복확인</button>
 						</div>
-						
+
 						<div id="userIdText1" class="form-text">아이디 중복확인을 해주세요.</div>
-						
-					</div>
-					
-					<div class="mb-3">
-						<label for="" class="form-label">
-							별명
-						</label>
-						
-						<div class="input-group">
-							<input id="nickNameInput1" class="form-control" type="text" name="nickName">
-							<button id="nickNameExistButton1" class="btn btn-outline-secondary" type="button">중복확인</button>
-						</div>
-						
-						<div id="nickNameText1" class="form-text">별명 중복확인을 해주세요.</div>
-						
+
 					</div>
 
 					<div class="mb-3">
-						<label for="" class="form-label">
-							암호
-						</label>
-						<input id="passwordInput1" class="form-control" type="text" name="password">
+						<label for="" class="form-label"> 암호 </label> <input
+							id="passwordInput1" class="form-control" type="text"
+							name="password">
 						<div id="passwordText1" class="form-text"></div>
 					</div>
-					
+
 					<div class="mb-3">
-						<label for="" class="form-label">
-							암호 확인
-						</label>
-						<input id="passwordInput2" class="form-control" type="text">
+						<label for="" class="form-label"> 암호 확인 </label> <input
+							id="passwordInput2" class="form-control" type="text">
 					</div>
 
 					<div class="mb-3">
-						<label for="" class="form-label">
-						이메일
-						</label>
-						
+						<label for="" class="form-label"> 이메일 </label>
+
 						<div class="input-group">
-							<input id="emailInput1" class="form-control" type="email" name="email">
-							<button id="emailExistButton1" type="button" class="btn btn-outline-secondary">중복확인</button>
+							<input id="emailInput1" class="form-control" type="email"
+								name="email">
+							<button id="emailExistButton1" type="button"
+								class="btn btn-outline-secondary">중복확인</button>
 						</div>
-						
+
 						<div id="emailText1" class="form-text">이메일 중복확인을 해주세요.</div>
 					</div>
 
-					<input disabled id="submitButton1" class="btn btn-primary" type="submit" value="가입">
-				
+					<input disabled id="submitButton1" class="btn btn-primary"
+						type="submit" value="가입">
+
 				</form>
 			</div>
 		</div>
 	</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
 
-<script>
+	<script>
 const ctx = "${pageContext.request.contextPath}";
 // 아이디 사용 가능
 let availableId = false;
@@ -95,12 +82,10 @@ let availableId = false;
 let availableEmail = false;
 // 패스워드 사용 가능
 let availablePassword = false;
-// 별명 사용 가능
-let availableNickName = false;
 
 function enableSubmitButton() {
 	const button = document.querySelector("#submitButton1");
-	if (availableId && availableEmail && availablePassword && availableNickName) {
+	if (availableId && availableEmail && availablePassword) {
 		button.removeAttribute("disabled")
 	} else {
 		button.setAttribute("disabled", "");
@@ -164,26 +149,7 @@ document.querySelector("#userIdExistButton1").addEventListener("click", function
 	
 });
 
-//별명 중복확인
-document.querySelector("#nickNameExistButton1").addEventListener("click", function() {
-	availableNickName = false;
-	// 입력된 별명을
-	const userId = document.querySelector("#nickNameInput1").value;
-	
-	// fetch 요청 보내고
-	fetch(ctx + "/member/existNickName/" + userId)
-		.then(res => res.json())
-		.then(data => {
-			// 응답 받아서 메세지 출력
-			document.querySelector("#nickNameText1").innerText = data.message;
-			
-			if (data.status == "not exist") {
-				availableNickName = true;
-				enableSubmitButton();
-			}
-		}); 
-	
-});
+
 
 /* 패스워드 일치하는 지 확인 시작 */
 const passwordInput1 = document.querySelector("#passwordInput1");

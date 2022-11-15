@@ -20,64 +20,52 @@
 </head>
 <body>
 	<my:navBar active="memberInfo"></my:navBar>
-	
+
 	<div class="container-md">
 		<div class="row">
 			<div class="col">
-				
+
 				<c:if test="${not empty message }">
-					<div class="alert alert-success">
-						${message }
-					</div>
+					<div class="alert alert-success">${message }</div>
 				</c:if>
-				
+
 				<h1>
-					회원 정보 
-					
+					회원 정보
+
 					<c:url value="/member/modify" var="modifyLink">
 						<c:param value="${member.id }" name="id"></c:param>
 					</c:url>
-					<a class="btn btn-warning" href="${modifyLink }"><i class="fa-solid fa-pen-to-square"></i></a>
+					<a class="btn btn-warning" href="${modifyLink }"><i
+						class="fa-solid fa-pen-to-square"></i></a>
 				</h1>
-				
+
 				<div class="mb-3">
-					<label for="" class="form-label">
-						아이디 
-					</label>
-					<input class="form-control" type="text" value="${member.id }" readonly>
+					<label for="" class="form-label"> 아이디 </label> <input
+						class="form-control" type="text" value="${member.id }" readonly>
 				</div>
-				
+
 				<div class="mb-3">
-					<label for="" class="form-label">
-						별명
-					</label>
-					<input class="form-control" type="text" value="${member.nickName }" readonly>
-				</div>
-				
-				<div class="mb-3">
-					<label for="" class="form-label">
-						암호 
-					</label>
-					<input class="form-control" type="text" value="${member.password }" readonly>
+					<label for="" class="form-label"> 암호 </label> <input
+						class="form-control" type="text" value="${member.password }"
+						readonly>
 				</div>
 				<div class="mb-3">
-					<label for="" class="form-label">
-						이메일 
-					</label>
-					<input class="form-control" type="text" value="${member.email }" readonly>
+					<label for="" class="form-label"> 이메일 </label> <input
+						class="form-control" type="text" value="${member.email }" readonly>
 				</div>
 				<div class="mb-3">
-					<label for="" class="form-label">
-						가입일시 
-					</label>
-					<input class="form-control" type="text" value="${member.inserted }" readonly>
+					<label for="" class="form-label"> 가입일시 </label> <input
+						class="form-control" type="text" value="${member.inserted }"
+						readonly>
 				</div>
-				
+
 			</div>
 		</div>
 	</div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+		crossorigin="anonymous"></script>
 </body>
 </html>

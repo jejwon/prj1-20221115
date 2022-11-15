@@ -48,6 +48,10 @@ public class MemberService {
 		return mapper.selectByEmail(email);
 	}
 
+	public MemberDto getByNickName(String nickName) {
+		return mapper.selectByNickName(nickName);
+	}
+
 }
 
 
