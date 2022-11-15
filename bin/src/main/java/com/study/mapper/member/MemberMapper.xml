@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.study.mapper.member.MemberMapper">
+ 	<insert id="insert">
+ 	INSERT INTO Member (id, password, email)
+ 	VALUES (#{id}, #{password}, #{email})
+ 	</insert>
+ 	
+ 	<select id="selectAll" resultType="com.study.domain.member.MemberDto"> <!-- dto프로퍼티명과 같으면 map 안쓰고 type으로 -->
+ 	SELECT 
+ 		id,
+ 		'숨김' password, <!--텍스트가 리턴됨  -->
+ 		email,
+ 		inserted
+ 	FROM Member
+ 	ORDER BY id
+ 	</select>
+ 	
+ 	<select id="selectById" resultType="com.study.domain.member.MemberDto">
+ 	SELECT 
+ 		id,
+ 		password,
+ 		email,
+ 		inserted
+ 	FROM Member
+ 	WHERE id = #{id}
+ 	</select>
+ 	
+ 	<update id="update">
+	UPDATE Member
+	SET
+		password = #{password},
+		email = #{email}
+	WHERE
+		id = #{id}
+	
+	</update>
+	
+	<delete id="deleteById">
+	DELETE FROM Member
+	WHERE id = #{id}
+	</delete>
+	
+	
+	
+	<select id="selectByEmail" resultType="com.study.domain.member.MemberDto">
+	SELECT 
+		id,
+		password,
+		email,
+		inserted
+	FROM
+		Member
+	WHERE
+		email = #{email}
+	</select>
+	
+ </mapper>
