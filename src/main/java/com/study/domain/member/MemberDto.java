@@ -11,4 +11,5 @@ public class MemberDto {
 	private String password;
 	private String nickName;
 	private LocalDateTime inserted;
+
 }

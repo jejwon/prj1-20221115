@@ -24,18 +24,18 @@ import com.study.service.member.MemberService;
 @Controller
 @RequestMapping("member")
 public class MemberController {
-	
+
 	@Autowired
 	private MemberService service;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	@GetMapping("login")
 	public void login() {
-				
+
 	}
-	
+
 	@GetMapping("existNickName/{nickName}")
 	@ResponseBody
 	public Map<String, Object> existNickName(@PathVariable String nickName) {
@@ -54,8 +54,7 @@ public class MemberController {
 		return map;
 	}
 
-	
-	@PostMapping("existEmail") //post 방식: .com 가용
+	@PostMapping("existEmail")
 	@ResponseBody
 	public Map<String, Object> existEmail(@RequestBody Map<String, String> req) {
 
@@ -74,12 +73,11 @@ public class MemberController {
 		return map;
 	}
 
-
 	@GetMapping("existId/{id}")
 	@ResponseBody
 	public Map<String, Object> existId(@PathVariable String id) {
 		Map<String, Object> map = new HashMap<>();
-		
+
 		MemberDto member = service.getById(id);
 
 		if (member == null) {
@@ -89,49 +87,47 @@ public class MemberController {
 			map.put("status", "exist");
 			map.put("message", "이미 존재하는 아이디입니다.");
 		}
-		
+
 		return map;
 	}
 
 	@GetMapping("signup")
 	public void signup() {
-		
+
 	}
-	
+
 	@PostMapping("signup")
-	public String signup(@ModelAttribute MemberDto member, RedirectAttributes rttr) { // 필드를 같은 이름의 리퀘스트 파라미터로 채움
+	public String signup(MemberDto member, RedirectAttributes rttr) {
 		System.out.println(member);
-		
+
 		int cnt = service.insert(member);
-		
-		
-			// 가입 잘되면
-			rttr.addFlashAttribute("message", "회원가입이 되었습니다.");
-			return "redirect:/board/list";
-		
+
+		// 가입 잘되면
+		rttr.addFlashAttribute("message", "회원가입 되었습니다.");
+		return "redirect:/board/list";
 	}
-	
+
 	@GetMapping("list")
 	public void list(Model model) {
 		model.addAttribute("memberList", service.list());
 	}
-	
-	@GetMapping({"info", "modify"})
-	public void get(String id, Model model) {
-		
+
+	@GetMapping({ "info", "modify" })
+	public void info(String id, Model model) {
+
 		model.addAttribute("member", service.getById(id));
 	}
-	
 
 	@PostMapping("modify")
 	public String modify(MemberDto member, String oldPassword, RedirectAttributes rttr) {
 		MemberDto oldmember = service.getById(member.getId());
-		
+
 		rttr.addAttribute("id", member.getId());
-		if (oldmember.getPassword().equals(oldPassword)) {
+		boolean passwordMatch = passwordEncoder.matches(oldPassword, oldmember.getPassword());
+		if (passwordMatch) {
 			// 기존 암호가 맞으면 회원 정보 수정
 			int cnt = service.modify(member);
-			
+
 			if (cnt == 1) {
 				rttr.addFlashAttribute("message", "회원 정보가 수정되었습니다.");
 				return "redirect:/member/info";
@@ -143,39 +139,29 @@ public class MemberController {
 			rttr.addFlashAttribute("message", "암호가 일치하지 않습니다.");
 			return "redirect:/member/modify";
 		}
-		
+
 	}
-	
+
 	@PostMapping("remove")
-	public String remove(String id, String oldPassword, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
+	public String remove(String id, String oldPassword, RedirectAttributes rttr, HttpServletRequest request)
+			throws Exception {
 		MemberDto oldmember = service.getById(id);
-		
+
 		boolean passwordMatch = passwordEncoder.matches(oldPassword, oldmember.getPassword());
-		
-//		if (oldmember.getPassword().equals(oldPassword)) {
-		if(passwordMatch) {
+
+		if (passwordMatch) {
 			service.remove(id);
-			
+
 			rttr.addFlashAttribute("message", "회원 탈퇴하였습니다.");
-			request.logout(); //탈퇴 후 로그아웃
+			request.logout();
+
 			return "redirect:/board/list";
-			
+
 		} else {
 			rttr.addAttribute("id", id);
 			rttr.addFlashAttribute("message", "암호가 일치하지 않습니다.");
 			return "redirect:/member/modify";
 		}
-		
+
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

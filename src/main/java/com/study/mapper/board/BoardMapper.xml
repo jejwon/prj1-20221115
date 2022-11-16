@@ -5,7 +5,7 @@
   
  <mapper namespace="com.study.mapper.board.BoardMapper">
  
- 	<delete id="deleteFileByBoardIdAndFileName">
+	<delete id="deleteFileByBoardIdAndFileName">
 	DELETE FROM File
 	WHERE boardId = #{id} AND name = #{fileName}
 	</delete>
@@ -105,8 +105,7 @@
 	UPDATE Board
 	SET
 		title = #{title},
-		content = #{content},
-		writer = #{writer}
+		content = #{content}
 	WHERE
 		id = #{id}
 	</update>
@@ -117,3 +116,7 @@
 	</delete>
 
 </mapper>
+
+
+
+

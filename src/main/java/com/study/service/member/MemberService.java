@@ -10,15 +10,19 @@ import com.study.mapper.member.MemberMapper;
 
 @Service
 public class MemberService {
+
 	@Autowired
 	private MemberMapper mapper;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
+
 	public int insert(MemberDto member) {
+		
 		String pw = member.getPassword();
+		
 		member.setPassword(passwordEncoder.encode(pw));
+		
 		return mapper.insert(member);
 	}
 
@@ -36,8 +40,10 @@ public class MemberService {
 		int cnt = 0;
 		
 		try {
-			String encodedPw = passwordEncoder.encode(member.getPassword());
-			member.setPassword(encodedPw);
+			if (member.getPassword() != null) {
+				String encodedPw = passwordEncoder.encode(member.getPassword());
+				member.setPassword(encodedPw);
+			}
 			
 			return mapper.update(member);
 		} catch (Exception e) {
@@ -57,13 +63,10 @@ public class MemberService {
 	}
 
 	public MemberDto getByNickName(String nickName) {
+		// TODO Auto-generated method stub
 		return mapper.selectByNickName(nickName);
 	}
 
 }
-
-
-
-
 
 
