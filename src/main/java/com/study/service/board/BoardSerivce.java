@@ -19,11 +19,9 @@ import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
-
-@Service //business logic을 담고 있는 bean
+@Service
 @Transactional
-public class BoardService {
-
+public class BoardSerivce {
 
 	@Autowired
 	private BoardMapper boardMapper;
