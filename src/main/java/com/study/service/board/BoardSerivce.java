@@ -170,6 +170,9 @@ public class BoardSerivce {
 		
 //		int a = 3 / 0; // runtime exception
 		
+		// 좋아요 지우기
+		boardMapper.deleteFileByBoardId(id);
+		
 		// 게시물 지우기
 		return boardMapper.delete(id);
 	}

@@ -32,9 +32,15 @@ public interface BoardMapper {
 
 	int countLikeByBoardId(String boardId);
 
-	default BoardDto select(int id) {
+	default BoardDto select(int id) { //같은 메소드 (파라미터 다르면) 오버로딩 가능
 		return select(id, null);
 	}
+	
+	int deleteLikeByBoardId(int id);
+
+	int deleteLikeByMemberId(String id);
+
+	List<BoardDto> listByMemberId(String id);
 }
 
 
