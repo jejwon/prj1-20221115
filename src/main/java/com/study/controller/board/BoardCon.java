@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.study.domain.board.BoardDto1;
+import com.study.domain.board.Pagination;
 import com.study.service.board.BoardService1;
 
 @Controller
@@ -33,9 +35,13 @@ public class BoardCon {
 	}
 
 	@GetMapping("listEx")
-	public void list(Model model) {
+	public void list(
+			
+			@RequestParam(name="page", defaultValue="1") int page, 
+			Pagination pagination, //model attr  생략
+			Model model) {
 
-		List<BoardDto1> list = service.listBoard();
+		List<BoardDto1> list = service.listBoard(page, pagination);
 
 		model.addAttribute("boardList", list);
 	}

@@ -13,13 +13,22 @@
 <body>
 	<my:navBarEx></my:navBarEx>
 
-	<h1>등록하기</h1>
+	<h1>post</h1>
 	
 	<form action="" method="post">
-		작성자 <input type="text" name="writer"><br>
-		제목 <input type="text" name="title" > <br>
-		본문 <textarea name="content"></textarea> <br>
-		<input type="submit" value="등록">
+	<div class="form-floating mb-3">
+		<input type="text" class="form-control"  name="writer">
+		<label for="floatingInput">writer</label>
+	</div>	
+	<div class="form-floating mb-3">
+		<input type="text" class="form-control"  name="title">
+		<label for="floatingInput">title</label>
+	</div>	
+	<div class="form-floating mb-3">
+		<textarea class="form-control"  name="content" rows=5 cols=15 style="resize: none;"></textarea>
+		<label for="floatingInput">write here!</label>
+	</div>
+		<input type="submit" value="post">
 	</form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>

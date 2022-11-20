@@ -14,27 +14,41 @@
 <body>
 <my:navBarEx></my:navBarEx>
 
-	<h1>${board.id }번 수정</h1>
 	<div class="container-md">
 		<div class="row">
 			<div class="col">
+				<h1>no. ${board.id }</h1>
 				<form id="modifyForm" action="" method="post">
-					제목 <input type="text" name="title" value="${board.title }"> <br>
-					작성자 <input type="text" name="writer" value="${board.writer }" readonly> <br>
-					본문 <textarea name="content" rows="5">${board.content }</textarea> <br>
-					작성일시 <input type="datetime-local" value="${board.inserted }" readonly> <br>
+					<div class="form-floating mb-3">
+					<input type="text" class="form-control" value="${board.title }">
+					<label for="floatingInput">title</label>
+				</div>
+				<div class="form-floating mb-3">
+					<textarea class="form-control" id="content" style="resize: none; height: 100px">${board.content }</textarea>
+ 					<label for="floatingTextarea2"></label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="text" class="form-control" value="${board.writer }" readonly>
+					<label for="floatingInput">writer</label>
+				</div>
+				<div class="form-floating mb-3">
+					<input type="datetime-local" class="form-control" value="${board.inserted }"readonly> <br>
+					<label for="floatingInput">inserted</label>
+				</div>
 				</form>
 			</div>
 		</div>
 	</div>
-<input id="modifyConfirm" type="submit" value="수정">
 	
-<c:url value="/board1/remove" var="removeLink"></c:url> 
+<div class="container">
+	<input id="modifyConfirm" type="submit" value="edit">
+	<c:url value="/board1/remove" var="removeLink"></c:url> 
 	<form id="removeForm" action="${removeLink }" method="post">
 		<input type="hidden" name="id" value="${board.id }">
-		<input id="removeConfirm" type="submit" value="삭제">
+		<input id="removeConfirm" class="btn btn-danger" type="submit" value="delete">
 	</form>
-	
+		
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>

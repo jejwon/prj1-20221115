@@ -18,7 +18,7 @@
           <a class="nav-link active" aria-current="page" href="${listLink }">List</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="${registerLink }">register</a>
+          <a class="nav-link" href="${registerLink }">post</a>
         </li>
       </ul>
       <form class="d-flex" role="search">

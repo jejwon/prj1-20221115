@@ -4,6 +4,10 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="com.study.mapper.board.BoardMapper1">
+ 	<select id="countAll" resultType="int">
+ 	SELECT COUNT(*) FROM Board1
+ 	</select>
+ 	
  	<insert id="insert">
  		INSERT INTO Board1 (title, content, writer)
  		VALUES (#{title}, #{content}, #{writer})
@@ -17,6 +21,7 @@
  		inserted
  	FROM Board1 
  	ORDER BY id DESC
+ 	LIMIT #{offset}, #{some}
  	</select>
  	
  	<select id="getById" resultType="com.study.domain.board.BoardDto1">

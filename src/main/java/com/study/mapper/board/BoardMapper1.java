@@ -8,12 +8,14 @@ public interface BoardMapper1 {
 
 	int insert(BoardDto1 board);
 
-	List<BoardDto1> list();
+	List<BoardDto1> list(int offset, int some);
 
 	BoardDto1 getById(int id);
 
 	int change(BoardDto1 board);
 
 	int remove(int id);
+
+	int countAll();
 	
 }

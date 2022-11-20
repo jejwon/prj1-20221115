@@ -25,28 +25,28 @@
 		<div class="row">
 			<div class="col">
 				<h1>
-					${board.id }번 게시물
+					no. ${board.id }
 					<c:url value="/board1/modifyEx" var="modifyLink">
 						<c:param name="id" value="${board.id }"></c:param>
 					</c:url>
-					<a href="${modifyLink }">수정</a>
+					<a href="${modifyLink }">edit</a>
 				</h1>
 
 				<div class="form-floating mb-3">
 					<input type="text" class="form-control" value="${board.title }" readonly>
-					<label for="floatingInput">제목</label>
+					<label for="floatingInput">title</label>
 				</div>
 				<div class="form-floating mb-3">
-					<textarea class="form-control" rows=5 cols=15 style="resize: none;" readonly>${board.content }</textarea>
-					<label for="floatingInput">본문</label>
+					<textarea class="form-control" id="content" style="resize: none; height: 100px" readonly>${board.content }</textarea>
+ 					<label for="floatingTextarea2"></label>
 				</div>
 				<div class="form-floating mb-3">
 					<input type="text" class="form-control" value="${board.writer }" readonly> <br>
-					<label for="floatingInput">작성자</label>
+					<label for="floatingInput">writer</label>
 				</div>
 				<div class="form-floating mb-3">
 					<input type="datetime-local" class="form-control" value="${board.inserted }"readonly> <br>
-					<label for="floatingInput">작성일시</label>
+					<label for="floatingInput">inserted</label>
 				</div>
 
 
