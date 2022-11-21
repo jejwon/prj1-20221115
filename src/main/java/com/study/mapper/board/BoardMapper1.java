@@ -8,7 +8,7 @@ public interface BoardMapper1 {
 
 	int insert(BoardDto1 board);
 
-	List<BoardDto1> list(int offset, int some);
+	List<BoardDto1> list(int offset, int some, String type, String keyword);
 
 	BoardDto1 getById(int id);
 
@@ -16,6 +16,6 @@ public interface BoardMapper1 {
 
 	int remove(int id);
 
-	int countAll();
+	int countAll(String type, String keyword);
 	
 }

@@ -61,8 +61,10 @@
 						<ul class="pagination justify-content-center">
 
 							<c:if test="${pagination.current != 1 }">
-								<c:url value="/board/list" var="listLink">
+								<c:url value="/board1/listEx" var="listLink">
 									<c:param name="page" value="1" />
+									<c:param name="q" value="${param.q }"/>
+									<c:param name="t" value="${param.t }"/>
 								</c:url>
 								<li class="page-item"><a class="page-link" href="${listLink }"
 									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
@@ -72,6 +74,8 @@
 							<c:if test="${pagination.prev }">
 								<c:url value="/board1/listEx" var="listLink">
 									<c:param value="${pagination.prevButton }" name="page"></c:param>
+									<c:param name="q" value="${param.q }"/>
+									<c:param name="t" value="${param.t }"/>
 								</c:url>
 
 								<li class="page-item"><a href="${listLink }"
@@ -82,6 +86,8 @@
 								var="pageNumber">
 								<c:url value="/board1/listEx" var="listLink">
 									<c:param name="page" value="${pageNumber }"></c:param>
+									<c:param name="q" value="${param.q }"/>
+									<c:param name="t" value="${param.t }"/>
 								</c:url>
 								<li
 									class="page-item ${pagination.current == pageNumber ? 'active' : ''}"><a
@@ -91,6 +97,8 @@
 							<c:if test="${pagination.next }">
 								<c:url value="/board1/listEx" var="listLink">
 									<c:param value="${pagination.nextButton }" name="page" />
+									<c:param name="q" value="${param.q }"/>
+									<c:param name="t" value="${param.t }"/>
 								</c:url>
 								<li class="page-item"><a href="${listLink }"
 									class="page-link"> <i class="fa-solid fa-angle-right"></i>
@@ -100,6 +108,8 @@
 							<c:if test="${pagination.current != pagination.last }">
 								<c:url value="/board1/listEx" var="listLink">
 									<c:param value="${pagination.last }" name="page"></c:param>
+									<c:param name="q" value="${param.q }"/>
+									<c:param name="t" value="${param.t }"/>
 								</c:url>
 
 								<li class="page-item"><a class="page-link" href="${listLink }"

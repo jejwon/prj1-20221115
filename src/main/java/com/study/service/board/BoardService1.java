@@ -14,16 +14,16 @@ public class BoardService1 { //mapper에 넘기기
 	@Autowired
 	private BoardMapper1 mapper;
 	
-	public void register(BoardDto1 board) {
+	public int register(BoardDto1 board) {
 
-		 mapper.insert(board);
+		 return mapper.insert(board);
 	}
 
-	public List<BoardDto1> listBoard(int page, Pagination pagination) {
+	public List<BoardDto1> listBoard(int page, String type, String keyword, Pagination pagination) {
 		int some = 10; //limit query
 		int offset = (page - 1) * some;
 		
-		int countAll = mapper.countAll();
+		int countAll = mapper.countAll(type, "%" + "keyword" + "%");
 		int last = (countAll - 1) / some + 1;
 		
 		int left = (page - 1) / 10 * 10 + 1;
@@ -46,7 +46,7 @@ public class BoardService1 { //mapper에 넘기기
 		pagination.setPrev(prev);
 		pagination.setNext(next);
 		
-		return mapper.list(offset, some);
+		return mapper.list(offset, some, type, "%" + keyword +"%");
 	}
 
 	public BoardDto1 get(int id) {

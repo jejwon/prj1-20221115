@@ -28,20 +28,29 @@ public class BoardCon {
 	}
 
 	@PostMapping("registerEx")
-	public String register(BoardDto1 board) {
-		System.out.println(board);
-		service.register(board);
+	public String register(BoardDto1 board, RedirectAttributes rttr) {
+		//System.out.println(board);
+		int cnt = service.register(board);
+		
+		if(cnt == 1) {
+			rttr.addFlashAttribute("message", "registered!");
+		} else {
+			rttr.addFlashAttribute("message", "failed. try again!");
+		}
+		
 		return "redirect:/board1/listEx";
 	}
 
 	@GetMapping("listEx")
 	public void list(
 			
-			@RequestParam(name="page", defaultValue="1") int page, 
+			@RequestParam(name="page", defaultValue="1") int page,
+			@RequestParam(name="t", defaultValue="all") String type,
+			@RequestParam(name="q", defaultValue="") String keyword,
 			Pagination pagination, //model attr  생략
 			Model model) {
 
-		List<BoardDto1> list = service.listBoard(page, pagination);
+		List<BoardDto1> list = service.listBoard(page, type, keyword, pagination);
 
 		model.addAttribute("boardList", list);
 	}
@@ -64,9 +73,9 @@ public class BoardCon {
 		int cnt = service.update(board);
 		
 		if(cnt == 1) {
-			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되었습니다.");
+			rttr.addFlashAttribute("message", "no." + board.getId() + " post edit success");
 		} else {
-			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되었습니다.");
+			rttr.addFlashAttribute("message", "no." + board.getId() + " post failed to edit");
 		}
 		
 		return "redirect:/board1/listEx";
@@ -77,9 +86,9 @@ public class BoardCon {
 		int cnt = service.delete(id);
 		
 		if(cnt == 1) {
-			rttr.addFlashAttribute("message", id + "번 게시물이 삭제되었습니다.");
+			rttr.addFlashAttribute("message", "no." + id + " post delete success");
 		} else {
-			rttr.addFlashAttribute("message", id + "번 게시물이 삭제되지 않았습니다.");
+			rttr.addFlashAttribute("message", "no." + id + " post failed to delete");
 		}
 		
 		return "redirect:/board1/listEx";

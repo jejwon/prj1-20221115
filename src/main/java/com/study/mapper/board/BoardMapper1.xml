@@ -6,6 +6,18 @@
  <mapper namespace="com.study.mapper.board.BoardMapper1">
  	<select id="countAll" resultType="int">
  	SELECT COUNT(*) FROM Board1
+ 	WHERE 
+ 		<trim prefixOverrides="OR">
+ 			<if test="type == 'all' || type == 'title'">
+	 		OR title LIKE #{keyword}
+ 			</if>
+ 			<if test="type == 'all' || type == 'writer'">
+	 		 OR writer LIKE #{keyword}
+ 			</if>
+ 			<if test="type == 'all' || type == 'content'">
+	 		OR content LIKE #{keyword}
+ 			</if>
+ 		</trim>  
  	</select>
  	
  	<insert id="insert">
@@ -20,6 +32,18 @@
  		writer,
  		inserted
  	FROM Board1 
+ 	WHERE 
+ 		<trim prefixOverrides="OR">
+ 			<if test="type == 'all' || type == 'title'">
+	 		OR title LIKE #{keyword}
+ 			</if>
+ 			<if test="type == 'all' || type == 'writer'">
+	 		 OR writer LIKE #{keyword}
+ 			</if>
+ 			<if test="type == 'all' || type == 'content'">
+	 		OR content LIKE #{keyword}
+ 			</if>
+ 		</trim>  
  	ORDER BY id DESC
  	LIMIT #{offset}, #{some}
  	</select>
