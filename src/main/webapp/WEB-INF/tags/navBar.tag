@@ -8,27 +8,36 @@
 }
 </style>
 <%-- authorize tag --%>
-<%-- spring security expressions --%>
-<sec:authorize access="isAuthenticated()" var="loggedIn"/>
-	<%-- <c:if test="${loggedIn }">
+<%-- spring security expressions, 책 673,674 --%>
+<%--
+<sec:authorize access="isAuthenticated()">
 		<h1>로그인됨!</h1>
-	</c:if>
-	<c:if test="${not loggedIn }">
-		<h1>로그인 안됨!</h1>
-	</c:if> --%>
+</sec:authorize>
+<sec:authorize access="not isAuthenticated()">
+	<h1>로그인 안됨!</h1>
+</sec:authorize>
+ --%>
 
-
+<sec:authorize access="isAuthenticated()" var="loggedIn" />
 
 <c:url value="/board/list" var="listLink" />
 <c:url value="/board/register" var="registerLink" />
 <c:url value="/member/signup" var="signupLink" />
 <c:url value="/member/list" var="memberListLink" />
-<c:url value="/member/login" var="loginLink"/>
-<c:url value="/member/logout" var="logoutLink"/>
+<c:url value="/member/login" var="loginLink" />
+<c:url value="/member/logout" var="logoutLink" />
+
+<sec:authentication property="name" var="username"/>
+<c:url value="/member/info" var="memberInfoLink" >
+	<c:param name="id" value="${username }" />
+</c:url>
 
 <nav class="navbar navbar-expand-md bg-light mb-3">
   <div class="container-md">
-    <a class="navbar-brand" href="${listLink }">게시판</a>
+    <a class="navbar-brand" href="${listLink }">
+    	<c:url value="/content/spring-logo.svg" var="logoLink" />
+    	<img src="${logoLink }" alt="" style="height: 40px;">
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -38,29 +47,36 @@
           <a class="nav-link ${active eq 'list' ? 'active' : '' }" href="${listLink }">목록</a>
         </li>
         <c:if test="${loggedIn }">
-        <li class="nav-item">
-          <a class="nav-link ${active eq 'register' ? 'active' : '' }" href="${registerLink }">작성</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link ${active eq 'memberList' ? 'active' : '' }" href="${memberListLink }">회원목록</a>
-        </li>
-         </c:if>
-        <c:if test="${not loggedIn }">
-        <li class="nav-item">
-          <a class="nav-link ${active eq 'signup' ? 'active' : '' }" href="${signupLink }">회원가입</a>
-        </li>
+	        <li class="nav-item">
+	          <a class="nav-link ${active eq 'register' ? 'active' : '' }" href="${registerLink }">작성</a>
+	        </li>
         </c:if>
-       <!--li.nav-item*2>a.nav-link  --> 
-       <c:if test="${not loggedIn }">
-	       <li class="nav-item">
-	       		<a href="${loginLink }" class="nav-link">로그인</a>
-	       </li>
-       </c:if>
-       <c:if test="${loggedIn }">
-	       <li class="nav-item">
-	       		<a href="${logoutLink }" class="nav-link">로그아웃</a>
-	       </li>
-       </c:if>
+	    
+	    <sec:authorize access="hasAuthority('admin')">
+	        <li class="nav-item">
+	          <a class="nav-link ${active eq 'memberList' ? 'active' : '' }" href="${memberListLink }">회원목록</a>
+	        </li>
+	    </sec:authorize>
+        
+        <c:if test="${not loggedIn }">
+	        <li class="nav-item">
+	          <a class="nav-link ${active eq 'signup' ? 'active' : '' }" href="${signupLink }">회원가입</a>
+	        </li>
+	        
+	        <li class="nav-item">
+	        	<a href="${loginLink }" class="nav-link">로그인</a>
+	        </li>
+        </c:if>        
+        
+        <c:if test="${loggedIn }">
+        
+        	<li class="nav-item">
+	        	<a href="${memberInfoLink }" class="nav-link">회원정보</a>
+	        </li>
+	        <li class="nav-item">
+	        	<a href="${logoutLink }" class="nav-link">로그아웃</a>
+	        </li>
+        </c:if>
         
       </ul>
       <form action="${listLink }" class="d-flex" role="search">

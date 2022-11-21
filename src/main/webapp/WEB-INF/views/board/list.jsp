@@ -22,22 +22,24 @@
 </head>
 <body>
 	<my:navBar active="list"></my:navBar>
-
+	
 	<div class="container-md">
 		<div class="row">
 			<div class="col">
-
+			
 
 				<c:if test="${not empty message }">
-					<div class="alert alert-success">${message }</div>
+					<div class="alert alert-success">
+						${message }
+					</div>
 				</c:if>
-
+				
 				<h1>게시물 목록</h1>
 				<table class="table">
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>좋아요</th>
+							<th><i class="fa-solid fa-thumbs-up"></i></th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일시</th>
@@ -48,106 +50,128 @@
 							<tr>
 								<td>${board.id }</td>
 								<td>${board.countLike }</td>
-								<td><c:url value="/board/get" var="getLink">
+								<td>
+									<c:url value="/board/get" var="getLink">
 										<c:param name="id" value="${board.id }"></c:param>
-									</c:url> <a href="${getLink }"> ${board.title } </a> <%--댓글 수 출력 --%> <c:if
-										test="${board.countReply > 0 }">
-										<span class="badge rounded-pill text-bg-light"> <i
-											class="fa-regular fa-comment-dots"></i> ${board.countReply }
+									</c:url>
+									<a href="${getLink }">
+										${board.title }
+									</a>
+									
+									<%-- 댓글 수 출력 --%>
+									<c:if test="${board.countReply > 0 }">
+										<span class="badge rounded-pill text-bg-light">
+											<i class="fa-regular fa-comment-dots"></i>
+											${board.countReply }
 										</span>
-									</c:if> <%--파일 수 출력 --%> <c:if test="${board.countFile > 0 }">
-										<span class="badge rounded-pill text-bg-light"> <i
-											class="fa-regular fa-file"></i> ${board.countFile }
+									</c:if>
+									
+									<%-- 파일 수 출력 --%>
+									<c:if test="${board.countFile > 0 }">
+										<span class="badge rounded-pill text-bg-light">
+											<i class="fa-regular fa-file"></i>
+											${board.countFile }
 										</span>
-									</c:if></td>
+									</c:if>
+								</td>
 								<td>${board.writer }</td>
 								<td>${board.ago }</td>
 							</tr>
-						</c:forEach>
+						</c:forEach> 
 					</tbody>
 				</table>
 			</div>
 		</div>
-
+		
 		<!-- .row>.col -->
 		<div class="row">
 			<div class="col">
 				<nav class="mt-3" aria-label="Page navigation example">
-					<ul class="pagination justify-content-center">
-
-						<%-- 맨앞 버튼은 1페이지가 아니면 존재함 --%>
-						<c:if test="${pageInfo.currentPageNumber ne 1 }">
-							<c:url value="/board/list" var="listLink">
-								<c:param name="page" value="1" />
-								<c:param name="q" value="${param.q }" />
-								<c:param name="t" value="${param.t }" />
-							</c:url>
-							<!-- li.page-item>a.page-link{맨앞버튼} -->
-							<li class="page-item"><a href="${listLink }"
-								class="page-link"> <i class="fa-solid fa-angles-left"></i>
-							</a></li>
-						</c:if>
-
-						<c:if test="${pageInfo.hasPrevButton }">
-							<c:url value="/board/list" var="listLink">
-								<c:param name="page" value="${pageInfo.jumpPrevPageNumber }"></c:param>
-								<c:param name="q" value="${param.q }" />
-								<c:param name="t" value="${param.t }" />
-							</c:url>
-							<li class="page-item"><a href="${listLink }"
-								class="page-link"> <i class="fa-solid fa-angle-left"></i>
-							</a></li>
-						</c:if>
-
-						<c:forEach begin="${pageInfo.leftPageNumber }"
-							end="${pageInfo.rightPageNumber }" var="pageNumber">
-							<c:url value="/board/list" var="listLink">
-								<c:param name="page" value="${pageNumber }" />
-								<c:param name="q" value="${param.q }" />
-								<c:param name="t" value="${param.t }" />
-							</c:url>
-							<li
-								class="page-item
+				  <ul class="pagination justify-content-center">
+				  
+				  	<%-- 맨앞 버튼은 1페이지가 아니면 존재함 --%>
+				  	<c:if test="${pageInfo.currentPageNumber ne 1 }">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param name="page" value="1" />
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+				  		<!-- li.page-item>a.page-link{맨앞버튼} -->
+						<li class="page-item">
+							<a href="${listLink }" class="page-link">
+								<i class="fa-solid fa-angles-left"></i>
+							</a>
+						</li>
+				  	</c:if>
+				  	
+				  	<c:if test="${pageInfo.hasPrevButton }">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param name="page" value="${pageInfo.jumpPrevPageNumber }"></c:param>
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+				  		<li class="page-item">
+				  			<a href="${listLink }" class="page-link">
+				  				<i class="fa-solid fa-angle-left"></i>
+				  			</a>
+				  		</li>
+				  	</c:if>
+				  
+				  	<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param name="page" value="${pageNumber }" />
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+					    <li class="page-item
 					    
 					    	<%-- 현재페이지에 active 클래스 추가 --%>
 					    	${pageInfo.currentPageNumber eq pageNumber ? 'active' : '' }
 					    
-					    "><a
-								class="page-link" href="${listLink }">${pageNumber }</a></li>
-						</c:forEach>
-
-						<c:if test="${pageInfo.hasNextButton }">
-							<c:url value="/board/list" var="listLink">
-								<c:param name="page" value="${pageInfo.jumpNextPageNumber }"></c:param>
-								<c:param name="q" value="${param.q }" />
-								<c:param name="t" value="${param.t }" />
-							</c:url>
-							<li class="page-item"><a href="${listLink }"
-								class="page-link"> <i class="fa-solid fa-angle-right"></i>
-							</a></li>
-						</c:if>
-
-
-						<c:if
-							test="${pageInfo.currentPageNumber ne pageInfo.lastPageNumber }">
-							<c:url value="/board/list" var="listLink">
-								<c:param value="${pageInfo.lastPageNumber }" name="page" />
-								<c:param name="q" value="${param.q }" />
-								<c:param name="t" value="${param.t }" />
-							</c:url>
-							<!-- li.page-item>a.page-link{맨뒤버튼} -->
-							<li class="page-item"><a href="${listLink }"
-								class="page-link"> <i class="fa-solid fa-angles-right"></i>
-							</a></li>
-						</c:if>
-					</ul>
+					    "><a class="page-link" href="${listLink }">${pageNumber }</a></li>
+				  	</c:forEach>
+				  	
+				  	<c:if test="${pageInfo.hasNextButton }">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param name="page" value="${pageInfo.jumpNextPageNumber }"></c:param>
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+				  		<li class="page-item">
+				  			<a href="${listLink }" class="page-link">
+				  				<i class="fa-solid fa-angle-right"></i>
+				  			</a>
+				  		</li>
+				  	</c:if>
+				  	
+				  	
+				  	<c:if test="${pageInfo.currentPageNumber ne pageInfo.lastPageNumber }">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param value="${pageInfo.lastPageNumber }" name="page" />
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+				  		<!-- li.page-item>a.page-link{맨뒤버튼} -->
+				  		<li class="page-item">
+				  			<a href="${listLink }" class="page-link">
+				  				<i class="fa-solid fa-angles-right"></i>
+				  			</a>
+				  		</li>
+				  	</c:if>
+				  </ul>
 				</nav>
 			</div>
 		</div>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
-		crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+

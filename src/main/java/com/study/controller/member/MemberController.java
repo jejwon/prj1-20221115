@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -108,17 +109,20 @@ public class MemberController {
 	}
 
 	@GetMapping("list")
+	@PreAuthorize("hasAuthority('admin')")
 	public void list(Model model) {
 		model.addAttribute("memberList", service.list());
 	}
 
 	@GetMapping({ "info", "modify" })
+	@PreAuthorize("hasAuthority('admin') or (authentication.name == #id)")
 	public void info(String id, Model model) {
 
 		model.addAttribute("member", service.getById(id));
 	}
 
 	@PostMapping("modify")
+	@PreAuthorize("authentication.name == #member.id")
 	public String modify(MemberDto member, String oldPassword, RedirectAttributes rttr) {
 		MemberDto oldmember = service.getById(member.getId());
 

@@ -1,8 +1,10 @@
 package com.study.security;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,26 +17,37 @@ import com.study.mapper.member.MemberMapper;
 
 @Component //bean으로 인식
 public class CustomUserDetailsService implements UserDetailsService{
-
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-
+	
 	@Autowired
 	private MemberMapper mapper;
-	
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		MemberDto member = mapper.selectById(username); 
-		if(member == null) {
+		MemberDto member = mapper.selectById(username);
+		
+		if (member == null) {
 			return null;
-		} 
+		}
 		
-		String encodedPw = passwordEncoder.encode(member.getPassword());
+		List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 		
-		User user = new User(member.getId(), member.getPassword(), List.of()); // 가짜 사용자
+		if (member.getAuth() != null) {
+			for (String auth : member.getAuth()) {
+				authorityList.add(new SimpleGrantedAuthority(auth));
+			}
+		}
+		
+		User user = new User(member.getId(), member.getPassword(), authorityList);
 		
 		return user;
 	}
 
 }
+
+
+
+
+
