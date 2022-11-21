@@ -13,6 +13,10 @@
 	rel="stylesheet"
 	integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
 	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+	integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 	<my:navBarEx></my:navBarEx>
@@ -20,9 +24,11 @@
 	<div class="container-md" id="whole">
 		<div class="row">
 			<div class="col">
+
 				<c:if test="${not empty message }">
 					<div class="alert alert-success">${message }</div>
 				</c:if>
+
 				<h1>List</h1>
 				<table class="table">
 					<thead>
@@ -58,8 +64,8 @@
 								<c:url value="/board/list" var="listLink">
 									<c:param name="page" value="1" />
 								</c:url>
-								<li class="page-item"><a href="${listLink }"
-									class="page-link"> <i class="fa-solid fa-angles-left"></i>
+								<li class="page-item"><a class="page-link" href="${listLink }"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 								</a></li>
 							</c:if>
 
@@ -69,7 +75,7 @@
 								</c:url>
 
 								<li class="page-item"><a href="${listLink }"
-									class="page-link"><i class="fa-solid fa-angles-left"></i></a></li>
+									class="page-link"><i class="fa-solid fa-angle-left"></i></a></li>
 							</c:if>
 
 							<c:forEach begin="${pagination.left }" end="${pagination.right }"
@@ -96,8 +102,9 @@
 									<c:param value="${pagination.last }" name="page"></c:param>
 								</c:url>
 
-								<li class="page-item"><a href="${listLink }"
-									class="page-link"><i class="fa-solid fa-angles-right"></i></a></li>
+								<li class="page-item"><a class="page-link" href="${listLink }"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a></li>
 							</c:if>
 						</ul>
 					</nav>
