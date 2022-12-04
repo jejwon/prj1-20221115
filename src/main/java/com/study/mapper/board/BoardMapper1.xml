@@ -59,12 +59,11 @@
  	WHERE id = #{id}
  	</select>
  	
- 	<update id="change">
+ 	<update id="update">
  	UPDATE Board1 
  	SET 
  		title = #{title},
- 		content = #{content},
- 		writer = #{writer}
+ 		content = #{content}
  	WHERE 
  		id = #{id}
  	</update>

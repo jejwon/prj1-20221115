@@ -6,7 +6,7 @@
 <c:url value="/board1/registerEx" var="registerLink"/>
 
 
-<nav class="navbar navbar-expand-lg" style="background-color: LightSalmon;">
+<nav class="navbar navbar-expand-lg" style="background-color: LightSalmon; fontFamily:Charcoal,consolas;">
   <div class="container-fluid">
     <a class="navbar-brand" href="${listLink }">Board</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,17 +21,17 @@
           <a class="nav-link" ${active == 'post' ? 'active' : '' } href="${registerLink }">post</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
       
-      <select name="t" id="searchTypeSelect" class="form-select">
-      	<option value="all">All</option>
-      	<option value="title" ${param.t == 'title' ? 'selected' : '' }>title</option>
-      	<option value="writer" ${param.t == 'writer' ? 'selected' : '' }>writer</option>
-      	<option value="content" ${param.t == 'content' ? 'selected' : '' }>content</option>
-      </select>
-      
-        <input value="${param.q }" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <form action="${listLink }" class="d-flex" role="search">
+	      <select name="t" id="searchTypeSelect" class="form-select">
+	      	<option value="all">All</option>
+	      	<option value="title" ${param.t == 'title' ? 'selected' : '' }>title</option>
+	      	<option value="writer" ${param.t == 'writer' ? 'selected' : '' }>writer</option>
+	      	<option value="content" ${param.t == 'content' ? 'selected' : '' }>content</option>
+	      </select>
+	     
+	        <input value="${param.q }" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
+	        <button class="btn btn-outline-success" type="submit" style="background-color: #FA8072; border-color: #FA8072;"><i class="fa-solid fa-magnifying-glass" style="color:white;"></i></button>
       </form>
     </div>
   </div>

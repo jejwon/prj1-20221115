@@ -94,7 +94,7 @@ public class MemberController {
 
 	@GetMapping("signup")
 	public void signup() {
-
+		
 	}
 
 	@PostMapping("signup")

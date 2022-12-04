@@ -35,7 +35,7 @@ public class BoardCon {
 		if(cnt == 1) {
 			rttr.addFlashAttribute("message", "registered!");
 		} else {
-			rttr.addFlashAttribute("message", "failed. try again!");
+			rttr.addFlashAttribute("message", "failed.");
 		}
 		
 		return "redirect:/board1/listEx";
@@ -69,15 +69,15 @@ public class BoardCon {
 	}
 	
 	@PostMapping("modifyEx")
-	public String modify(BoardDto1 board, RedirectAttributes rttr, int id) {
+	public String modify(BoardDto1 board, RedirectAttributes rttr) {
 		int cnt = service.update(board);
+		System.out.println(cnt);
 		
-		if(cnt == 1) {
-			rttr.addFlashAttribute("message", "no." + board.getId() + " post edit success");
-		} else {
-			rttr.addFlashAttribute("message", "no." + board.getId() + " post failed to edit");
-		}
-		
+		 if(cnt == 1) { 
+			 rttr.addFlashAttribute("message", "no." + board.getId() + " post edit success"); 
+			 } else { 
+			 rttr.addFlashAttribute("message", "no." + board.getId() + " post failed to edit"); 
+			 }
 		return "redirect:/board1/listEx";
 	}
 	

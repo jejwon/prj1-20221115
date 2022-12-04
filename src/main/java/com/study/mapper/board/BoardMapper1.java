@@ -2,6 +2,7 @@ package com.study.mapper.board;
 
 import java.util.List;
 
+
 import com.study.domain.board.BoardDto1;
 
 public interface BoardMapper1 {
@@ -12,7 +13,7 @@ public interface BoardMapper1 {
 
 	BoardDto1 getById(int id);
 
-	int change(BoardDto1 board);
+	int update(BoardDto1 board);
 
 	int remove(int id);
 

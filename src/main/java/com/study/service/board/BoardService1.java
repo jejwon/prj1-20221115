@@ -23,7 +23,7 @@ public class BoardService1 { //mapper에 넘기기
 		int some = 10; //limit query
 		int offset = (page - 1) * some;
 		
-		int countAll = mapper.countAll(type, "%" + "keyword" + "%");
+		int countAll = mapper.countAll(type, "%" + keyword + "%");
 		int last = (countAll - 1) / some + 1;
 		
 		int left = (page - 1) / 10 * 10 + 1;
@@ -56,7 +56,7 @@ public class BoardService1 { //mapper에 넘기기
 
 	public int update(BoardDto1 board) {
 		
-		return mapper.change(board);
+		return mapper.update(board);
 		
 	}
 
